@@ -6,7 +6,6 @@ const url =
   "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
 
 dbController.getDatabase = (req, res, next) => {
-  let url = req.query.url;
   mongoose.connect(
     url,
     { useNewUrlParser: true }

@@ -1,13 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-const mapStateToProps = store => ({
-
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
 
 class FileContainer extends Component {
   constructor(props) {
@@ -24,4 +15,4 @@ class FileContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileContainer);
+export default FileContainer;

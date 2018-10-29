@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-const mapStateToProps = store => ({
 
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
 
 class DatabaseContainer extends Component {
   constructor(props){
@@ -22,4 +15,4 @@ class DatabaseContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DatabaseContainer);
+export default DatabaseContainer;
