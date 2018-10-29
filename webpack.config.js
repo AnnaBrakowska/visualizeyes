@@ -1,11 +1,13 @@
 const path = require('path');
-const webpack = require('webpack');
+const CleanWebPackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const outputDir = 'build';
+
 module.exports = {
-  entry: './client/index.js',
+  entry: './src/client/index.js',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, outputDir),
     filename: 'webpack-bundle.js'
   },
   module: {
@@ -13,41 +15,38 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['react', 'babel-preset-env', 'es2015', 'stage-2']
-            },
-          }
-        ]
+        use: 'babel-loader'
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
-          'css-loader',
-          'sass-loader'
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(png|ttf|svg|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { limit: 10000000 }
+          }
         ]
       }
     ]
   },
   devServer: {
-    contentBase: path.resolve(__dirname, '.'),
     port: 3000,
     open: true,
-    hot: true,
     proxy: {
       '/app': 'https://localhost:8080'
     }
   },
   plugins: [
+    new CleanWebPackPlugin([outputDir]),
     new HtmlWebpackPlugin({
-      filename: './index.html',
-      template: './index.html'
-    }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+      template: './public/index.html'
+    })
   ]
 }
