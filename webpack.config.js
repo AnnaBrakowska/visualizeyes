@@ -1,35 +1,32 @@
-const path = require('path');
-const CleanWebPackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const CleanWebPackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const outputDir = 'build';
+const outputDir = "build";
 
 module.exports = {
-  entry: './src/client/index.js',
+  entry: "./src/client/index.js",
   output: {
     path: path.resolve(__dirname, outputDir),
-    filename: 'webpack-bundle.js'
+    filename: "webpack-bundle.js"
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: "babel-loader"
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.(png|ttf|svg|jpg|gif)$/i,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: { limit: 10000000 }
           }
         ]
@@ -37,16 +34,20 @@ module.exports = {
     ]
   },
   devServer: {
+    inline: true,
     port: 3000,
-    open: true,
+    historyApiFallback: true,
     proxy: {
-      '/app': 'https://localhost:8080'
+      "/app/*": {
+        target: "http://localhost:8080",
+        secure: false
+      }
     }
   },
   plugins: [
     new CleanWebPackPlugin([outputDir]),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: "./public/index.html"
     })
   ]
-}
+};
