@@ -37,6 +37,10 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  handleDocIdClick(e) {
+    console.log(e.target);
+  }
+
   logout() {
     this.setState({
       collections: [],
@@ -87,10 +91,12 @@ class App extends Component {
       <div>
         {this.state.connected ? (
           <DbWindow
+            docData={this.state.data}
             currCol={this.state.currentCollection}
             logout={this.logout}
             collections={this.state.collections}
             handleColClick={this.handleColClick}
+            handleDocIdClick={this.handleDocIdClick}
           />
         ) : (
           <LandingPage
