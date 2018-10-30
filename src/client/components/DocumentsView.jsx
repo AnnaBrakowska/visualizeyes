@@ -6,7 +6,7 @@ export default class DocumentsView extends Component {
   }
   render() {
     return (
-      <div id="db-container">
+      <div id="documents-view">
         <h1>This is the documents container</h1>
       </div>
     );

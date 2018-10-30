@@ -4,9 +4,9 @@ import DocumentsView from './DocumentsView.jsx';
 
 const DbWindow = (props) => {
   return(
-    <div>
-    <CollectionsView />
-    <DocumentsView />
+    <div id="db-window">
+      <CollectionsView />
+      <DocumentsView />
     </div>
   );
 }
