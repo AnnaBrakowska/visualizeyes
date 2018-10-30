@@ -40,7 +40,7 @@ class App extends Component {
   logout() {
     this.setState({
       collections: [],
-      currentCollection: "services",
+      currentCollection: "",
       data: [],
       connected: false,
       username: "neighborhoodguide",
@@ -74,10 +74,7 @@ class App extends Component {
           dbName: "",
           connected: !this.state.connected
         });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      }).catch(err => console.log(err));
   }
 
   handleChange(event) {
