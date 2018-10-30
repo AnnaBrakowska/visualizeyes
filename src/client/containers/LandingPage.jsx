@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar.jsx';
 
 
-// const mapDispatchToProps = dispatch => ({
-//   setUrl: (url) => {
-//     dispatch(actions.setUrl(url))
-//   },
-//   changeConnection: () => {
-//     dispatch(actions.changeConnection())
-//   }
-// });
-
 class LandingPage extends Component {
   constructor(props) {
     super(props);

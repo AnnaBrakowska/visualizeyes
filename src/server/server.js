@@ -18,20 +18,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   next();
 // });
 
+// //CLIENT ROUTES
+app.get('/', (req, res, next) => {
+  res.header(200);
+  res.sendFile(path.join(__dirname,'../../build','index.html'))
+});
+app.get('/webpack-bundle.js', (req, res, next) => {
+  res.header(200);
+  res.sendFile(path.join(__dirname,'../../build','bundle.js'))
+});
+
 app.use('/app', appRouter);
 
 // Get request to get the database for users
-appRouter.get('/getDB', dbControllers.getDatabase, (req, res) => {
+appRouter.get('/db', dbControllers.getCollections, (req, res) => {
   res.status(200).json(res.locals).end();
 });
 
-// //if anything else redifect us to index.html
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + 'build/index.html'));
-// });
 
-app.listen(8080, () => {
-  console.log('listening at http://localhost:8080');
+app.listen(PORT, () => {
+  console.log(`listening at http://localhost:${PORT}`);
 });
 
 

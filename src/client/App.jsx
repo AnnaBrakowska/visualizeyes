@@ -18,10 +18,10 @@ class App extends Component {
   }
 
   fetchOnClick() {
-    fetch('/app/getDB')
+    fetch('/app/db')
     .then(res => res.json())
     .then ((res) => {
-       console.log('---------Response to client---------', res);
+       console.log('Res: ', res);
        this.setState({ connected: true });
     })
     .catch(err => console.log(err));

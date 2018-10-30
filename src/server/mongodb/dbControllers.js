@@ -2,21 +2,30 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dbController = {};
 
-const url =
-  "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
+const url = 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
+  // "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
+
+
+
+dbController.getCollections = (req, res, next) => {
+  mongoose.connect( url, { useNewUrlParser: true });
+  mongoose.connection.on('open', () => {
+    const collections = mongoose.connection.db.listCollections().toArray()
+    collections.then(result => {
+      result = result.map(obj => {return {name: obj.name, uuid: obj.info.uuid}}).filter(obj => obj.uuid)
+      res.send(result)});
+  });
+} 
 
 dbController.getDatabase = (req, res, next) => {
-  mongoose.connect(
-    url,
-    { useNewUrlParser: true }
-  );
+  mongoose.connect( url, { useNewUrlParser: true });
   // Runs this logic once there is an open connection with the database
   mongoose.connection.on("open", () => {
     // Gets all the collections inside our database and turns it into an array
-    const coll = mongoose.connection.db.listCollections().toArray();
-    // coll returns a promise so we use .then
+    const collections = mongoose.connection.db.listCollections().toArray();
+    // collections returns a promise so we use .then
     //* We need async await here so that we properly saving the documents in our response
-    coll
+    collections
       .then(async collections => {
         try {
           // we loop through the collections and use .find to get all the documents in the collection
@@ -24,12 +33,14 @@ dbController.getDatabase = (req, res, next) => {
             let collectionName = collections[i].name;
             let modelNames = mongoose.connection.modelNames();
             let Collection;
+            console.log('collName', collectionName);
+            console.log('modelName', modelNames);
 
           // * Await allows us to properly save our documents
           
             if(modelNames.indexOf(collectionName) !== -1){
               Collection = mongoose.connection.model(collectionName);
-            }else{
+            }else {
               Collection = mongoose.model(collectionName, new Schema({}), collectionName);
             } 
 
