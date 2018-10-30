@@ -2,7 +2,7 @@
 VisualEyes is a free open source GUI for MongoDB enthusiasts. Built on top of established, powerful project, VisualEyes
 version 2.0.0. is now offers 
 
-
+![alt text](login.png)
 
 
 # Technologies used:
