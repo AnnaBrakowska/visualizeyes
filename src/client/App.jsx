@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import DbWindow from './components/DbWindow.jsx';
-import LandingPage from './components/LandingPage.jsx';
+import React, { Component } from "react";
+import DbWindow from "./components/DbWindow.jsx";
+import LandingPage from "./components/LandingPage.jsx";
 
 require("./css/style.css");
-
 
 class App extends Component {
   constructor(props) {
@@ -26,62 +25,64 @@ class App extends Component {
   }
 
   getDocumentsHandler() {
-    fetch('/app/db')
-    .then(res => res.json())
-    .then ((res) => {
-       console.log('Res', res);
-       let keys = Object.keys(res);
-       let vals = Object.values(res);
-       console.log('keys', keys);
-       console.log('vals', vals);
-       this.setState({ 
-         resKeys: keys,
-         resVals : vals,
-         connected: true, });
-    })
-    .catch(err => console.log(err));
+    fetch("/app/db")
+      .then(res => res.json())
+      .then(res => {
+        console.log("Res", res);
+        let keys = Object.keys(res);
+        let vals = Object.values(res);
+        console.log("keys", keys);
+        console.log("vals", vals);
+        this.setState({
+          resKeys: keys,
+          resVals: vals,
+          connected: true
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   toggleConnected() {
-    this.setState({ connected: !this.state.connected })
+    this.setState({ connected: !this.state.connected });
   }
 
   connectHandler() {
     fetch("/app/db", {
       method: "POST",
       body: JSON.stringify({
-        'username': this.state.username,
-        'password': this.state.password,
-        'authoPort': this.state.authoPort,
-        'address': this.state.address,
-        'dbName': this.state.dbName
+        username: this.state.username,
+        password: this.state.password,
+        authoPort: this.state.authoPort,
+        address: this.state.address,
+        dbName: this.state.dbName
       }),
       headers: { "Content-Type": "application/json; charset=utf-8" }
     })
-    .then(res => res.json())
-    .then(data => {
-      this.toggleConnected();
-      this.setState({
-        collections: data,
-        username: "",
-        password: "",
-        authoPort: "",
-        address: "",
-        dbName: ""
+      .then(res => res.json())
+      .then(data => {
+        this.toggleConnected();
+        this.setState({
+          collections: data,
+          username: "",
+          password: "",
+          authoPort: "",
+          address: "",
+          dbName: ""
+        });
       })
-    })
-    .catch(error => {console.log(error)})
+      .catch(error => {
+        console.log(error);
+      });
   }
-    // .then(response =>
-    //   fetch("/app/getDB")
-    //     .then(res => res.json())
-    //     .then(res => {
-    //       console.log("---------Response to client---------", res);
-    //       this.setState({ connected: true });
-    //     })
-    //     .catch(err => console.log(err))
-    // );
-  
+  // .then(response =>
+  //   fetch("/app/getDB")
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       console.log("---------Response to client---------", res);
+  //       this.setState({ connected: true });
+  //     })
+  //     .catch(err => console.log(err))
+  // );
 
   handleChange(event) {
     event.preventDefault();
@@ -89,11 +90,10 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div>
         {this.state.connected ? (
-          <DbWindow />
+          <DbWindow toggleConnected={this.toggleConnected} />
         ) : (
           <LandingPage
             handleChange={this.handleChange}
@@ -103,7 +103,6 @@ class App extends Component {
         )}
       </div>
     );
- 
   }
 }
 
