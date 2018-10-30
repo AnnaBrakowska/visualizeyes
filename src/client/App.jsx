@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import DbWindow from "./components/DbWindow.jsx";
 import LandingPage from "./components/LandingPage.jsx";
 
-
-
 require("./css/style.css");
 
 class App extends Component {
@@ -11,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
-      currentCollection: 'services',
+      currentCollection: "services",
       data: [],
       connected: false,
       username: "neighborhoodguide",
@@ -23,7 +21,7 @@ class App extends Component {
 
     this.connectHandler = this.connectHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.toggleConnected = this.toggleConnected.bind(this);
+    this.logout = this.logout.bind(this);
     this.handleColClick = this.handleColClick.bind(this);
   }
 
@@ -31,16 +29,26 @@ class App extends Component {
     console.log(e.target);
     let collectionName = e.target.innerText;
     fetch(`/app/db/${collectionName}`)
-    .then(res => res.json())
-    .then(docs => {
-      console.log('docs', docs);
-      this.setState({ currCol: collectionName, data: docs })
-    })
-    .catch(err => console.log(err));
+      .then(res => res.json())
+      .then(docs => {
+        console.log("docs", docs);
+        this.setState({ currCol: collectionName, data: docs });
+      })
+      .catch(err => console.log(err));
   }
 
-  toggleConnected() {
-    this.setState({ connected: !this.state.connected });
+  logout() {
+    this.setState({
+      collections: [],
+      currentCollection: "services",
+      data: [],
+      connected: false,
+      username: "neighborhoodguide",
+      password: "26stmarksplace",
+      authoPort: "27362",
+      address: "ds127362.mlab.com",
+      dbName: "neighborhood-guide"
+    });
   }
 
   connectHandler() {
@@ -57,14 +65,14 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        this.toggleConnected();
         this.setState({
           collections: data,
           username: "",
           password: "",
           authoPort: "",
           address: "",
-          dbName: ""
+          dbName: "",
+          connected: !this.state.connected
         });
       })
       .catch(error => {
@@ -81,7 +89,12 @@ class App extends Component {
     return (
       <div>
         {this.state.connected ? (
-          <DbWindow currCol={this.state.currentCollection} toggleConnected={this.toggleConnected}  collections={this.state.collections} handleColClick={this.handleColClick}/>
+          <DbWindow
+            currCol={this.state.currentCollection}
+            logout={this.logout}
+            collections={this.state.collections}
+            handleColClick={this.handleColClick}
+          />
         ) : (
           <LandingPage
             handleChange={this.handleChange}

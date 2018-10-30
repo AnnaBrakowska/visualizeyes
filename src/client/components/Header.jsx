@@ -22,7 +22,7 @@ export default class Header extends Component {
 
         <div
           className="ui large red inverted button"
-          onClick={this.props.toggleConnected}
+          onClick={this.props.logout}
         >
           Logout
         </div>
