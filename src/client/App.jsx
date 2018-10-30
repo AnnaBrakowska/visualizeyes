@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import MainContainer from './containers/MainContainer.jsx';
-import LandingPage from './containers/LandingPage.jsx';
-import FileContainer from './containers/FileContainer.jsx';
-import Tree from 'react-tree-graph';
+import DbWindow from './components/DbWindow.jsx';
+import LandingPage from './components/LandingPage.jsx';
 
-const beautinator = require("beautinator");
+
 
 require("./css/style.css");
 
@@ -13,18 +11,23 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url : '',
-      collections : [],
-      data : [],
-      resKeys : [],
-      resVals : [],
-      connected : false
-    }
-    this.fetchOnClick = this.fetchOnClick.bind(this);
+      collections: [],
+      data: [],
+      connected: false,
+      username: "neighborhoodguide",
+      password: "26stmarksplace",
+      authoPort: "27362",
+      address: "ds127362.mlab.com",
+      dbName: "neighborhood-guide"
+    };
+
+    this.connectHandler = this.connectHandler.bind(this);
+    this.getDocumentsHandler = this.getDocumentsHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.toggleConnected = this.toggleConnected.bind(this);
   }
 
-  fetchOnClick() {
+  getDocumentsHandler() {
     fetch('/app/db')
     .then(res => res.json())
     .then ((res) => {
@@ -41,45 +44,64 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
-
-  componentDidMount() {
-    this.fetchOnClick()
+  toggleConnected() {
+    this.setState({ connected: !this.state.connected })
   }
 
+  connectHandler() {
+    fetch("/app/db", {
+      method: "POST",
+      body: JSON.stringify({
+        'username': this.state.username,
+        'password': this.state.password,
+        'authoPort': this.state.authoPort,
+        'address': this.state.address,
+        'dbName': this.state.dbName
+      }),
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    })
+    .then(res => res.json())
+    .then(data => {
+      this.toggleConnected();
+      this.setState({
+        collections: data,
+        username: "",
+        password: "",
+        authoPort: "",
+        address: "",
+        dbName: ""
+      })
+    })
+    .catch(error => {console.log(error)})
+  }
+    // .then(response =>
+    //   fetch("/app/getDB")
+    //     .then(res => res.json())
+    //     .then(res => {
+    //       console.log("---------Response to client---------", res);
+    //       this.setState({ connected: true });
+    //     })
+    //     .catch(err => console.log(err))
+    // );
+  
+
   handleChange(event) {
-    this.setState({ url: event.target.value});
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
-
-    // let documents = [];
-    // let objectConstruct = {};
-    // let count = 0;
-    let data = {};
-    
-    data.name = "Things";
-    data.children = this.state.resVals
-
-    // for(let i = 0; i < this.state.resVals.length; i++) {
-    //   let curVal = this.state.resVals[i];
-    //   data[i] = curVal;
-    //   console.log('curVal', curVal)
-    //   // count +=1;
-    //   // let document = JSON.stringify(curVal);
-    //   // documents.push(<span className='doc' key={count}><span className="inner">{beautinator(JSON.parse(document))}</span></span>);
-
-    // }
-
-    console.log('data', data);
     return (
-      <div className="custom-container">
-        <Tree
-          data={data}
-          width={800}
-          height={480}
-          svgProps={{
-            className: 'custom',
-        }}/>
+      <div>
+        {this.state.connected ? (
+          <DbWindow />
+        ) : (
+          <LandingPage
+            handleChange={this.handleChange}
+            connectHandler={this.connectHandler}
+            dataToPass={this.state}
+          />
+        )}
       </div>
     );
 

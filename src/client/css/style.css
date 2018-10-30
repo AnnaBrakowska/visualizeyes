@@ -11,7 +11,49 @@ body {
     font-size: 12px;
 }
 
-.wrap {
+#db-window {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 125px 4fr;
+    grid-gap: 0;
+}
+
+#collections-view {
+    background: #F7F9F9;
+    height: auto;
+    padding: 0 20px;
+}
+
+.collections-header {
+    width: 100%;
+    font-size: 10px;
+    height: 24px;
+    line-height: 24px;
+    border-bottom:2px #E8EBE4 solid; 
+    font-weight: 800px;
+}
+
+.collection {
+    width: 100%;
+    font-size: 8px; 
+    height: 15px;
+    line-height: 15px;
+    list-style-type: none;
+}
+
+.ant-checkbox-input {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    box-shadow: none;
+}
+
+#documents-view {
+    background: #fff;
+    height: auto;
+}
+/* .wrap {
     width: 100%;
     height: auto;
     padding: 0 20px;
@@ -19,7 +61,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
     row-gap: 10px;
-}
+} */
 
 .doc {
     height: auto;
