@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dbController = {};
 
-const url = 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
+let url = 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
   // "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
 
+dbController.connect = (req, res, next) => {
 
+}
 
 dbController.getCollections = (req, res, next) => {
   mongoose.connect( url, { useNewUrlParser: true });

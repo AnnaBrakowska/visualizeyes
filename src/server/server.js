@@ -31,9 +31,8 @@ app.get('/webpack-bundle.js', (req, res, next) => {
 app.use('/app', appRouter);
 
 // Get request to get the database for users
-appRouter.get('/db', dbControllers.getCollections, (req, res) => {
-  res.status(200).json(res.locals).end();
-});
+appRouter.get('/db', dbControllers.getCollections);
+appRouter.post('/db', dbControllers.connect);
 
 
 app.listen(PORT, () => {
