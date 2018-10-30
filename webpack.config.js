@@ -38,10 +38,8 @@ module.exports = {
     port: 3000,
     historyApiFallback: true,
     proxy: {
-      "/app/*": {
-        target: "http://localhost:8080",
-        secure: false
-      }
+      "/app": "http://localhost:8080",
+      "/app/*": "http://localhost:8080"
     }
   },
   plugins: [
