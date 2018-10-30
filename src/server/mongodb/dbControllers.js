@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dbController = {};
 
-let url;
-// 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
+let url = 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
   // "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
 
 
@@ -26,11 +25,29 @@ dbController.connect = (req, res, next) => {
   next();
 }
 
-// dbController.getDocuments  = (req, res, next) => {
-//   mongoose.connect( url, { useNewUrlParser: true });
-//   mongoose.connection.on('open', () => {
-//   }
-// }
+dbController.getDocuments  = (req, res, next) => {
+  console.log('i am here');
+  console.log('req.params', req.params);
+  const colName = req.params.colName;
+  mongoose.connect( url, { useNewUrlParser: true });
+  mongoose.connection.on('open', () => {
+    
+    let modelNames = mongoose.connection.modelNames();
+    console.log('modelNAmes', modelNames);
+    let Collection;
+    if(modelNames.indexOf(colName) !== -1){
+      Collection = mongoose.connection.model(colName);
+    }else {
+      Collection = mongoose.model(colName, new Schema({}), colName);
+    }
+    // console.log(Collection);
+    Collection.find().then(docs => {
+      console.log("IT REACHES HERE")
+      res.send(docs);
+    });
+
+  })
+}
 
 dbController.getDatabase = (req, res, next) => {
   mongoose.connect( url, { useNewUrlParser: true });

@@ -32,7 +32,7 @@ app.get('/webpack-bundle.js', (req, res, next) => {
 app.use('/app', appRouter);
 
 // Get request to get the database for users
-appRouter.get('/db', dbControllers.getCollections);
+appRouter.get('/db/:colName', dbControllers.getDocuments);
 appRouter.post('/db', dbControllers.connect, dbControllers.getCollections);
 
 

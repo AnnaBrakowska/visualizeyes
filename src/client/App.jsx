@@ -10,6 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
+      currentCollection: 'services',
       data: [],
       connected: false,
       username: "neighborhoodguide",
@@ -72,16 +73,6 @@ class App extends Component {
     })
     .catch(error => {console.log(error)})
   }
-    // .then(response =>
-    //   fetch("/app/getDB")
-    //     .then(res => res.json())
-    //     .then(res => {
-    //       console.log("---------Response to client---------", res);
-    //       this.setState({ connected: true });
-    //     })
-    //     .catch(err => console.log(err))
-    // );
-  
 
   handleChange(event) {
     event.preventDefault();
