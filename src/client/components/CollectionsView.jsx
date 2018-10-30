@@ -19,6 +19,6 @@ import { Checkbox } from 'antd';
       </div>
     );
   }
-
+}
 
 export default CollectionsView;
