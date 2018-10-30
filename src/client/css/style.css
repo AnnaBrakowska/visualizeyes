@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin');
 
 * {
     margin: 0;
@@ -7,7 +7,7 @@
 }
 
 body {
-    font-family: 'Cutive Mono', monospace;
+    font-family: 'Libre Franklin', sans-serif;
     font-size: 12px;
 }
 
@@ -40,24 +40,54 @@ body {
     overflow: scroll;
 }
 
-.dogs, .cats, .system-indexes {
+div.custom-container {
+    background-color: #fff;
+    width: 100vw;
     height: auto;
-    padding-bottom: 75%;
-    border: solid 1px black;
-    display: block;
-    font-size: 10px;
-    text-align: center;
+    /* border: black solid 1px; */
     position: relative;
 }
 
-.dogs {
-    background: #FE4A49;
+svg.custom {
+    position: absolute;
+    top: 50%;
 }
 
-.cats {
-    background: #FABC3C;
+svg.custom .node circle {
+    width: 10px;
+
+    height: 10px;
+	fill: rgb(0, 199, 255);
 }
 
-.system-indexes {
-    background: #00B8BF;
+svg.custom .node text {
+    font-size: 0.4rem;
+    background-color: #fff;
+    fill: #222;
+    text-align: center;
+    /* transform: translate(14px, 30px) rotate(-90deg); */
+    display: table; /* keep the background color wrapped tight */
+    background: white;
+    text-transform: uppercase;
 }
+
+svg.custom .node {
+	cursor: pointer;
+}
+
+svg.custom path.link {    
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+    stroke-dasharray: 1, 5;
+    stroke-dashoffset: 120; 
+    animation: dash 17s infinite linear;
+}
+
+
+
+@keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
