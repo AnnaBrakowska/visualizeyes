@@ -22,7 +22,6 @@ class App extends Component {
     };
 
     this.connectHandler = this.connectHandler.bind(this);
-    this.getDocumentsHandler = this.getDocumentsHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleConnected = this.toggleConnected.bind(this);
     this.handleColClick = this.handleColClick.bind(this);

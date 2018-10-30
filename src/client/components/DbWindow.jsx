@@ -5,11 +5,14 @@ import Header from "./Header.jsx";
 
 const DbWindow = (props) => {
   return(
-    <div id="db-window">
+    <div id="header">
       <Header toggleConnected={props.toggleConnected} />
-      <CollectionsView currCol={props.currCol} collections={props.collections} handleColClick={props.handleColClick}/>
-      <DocumentsView />
+      <div id="db-window">
+        <CollectionsView currCol={props.currCol} collections={props.collections} handleColClick={props.handleColClick}/>
+        <DocumentsView />
+      </div>
     </div>
+
   );
 };
 
