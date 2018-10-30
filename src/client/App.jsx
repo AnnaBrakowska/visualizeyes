@@ -26,7 +26,7 @@ class App extends Component {
     fetch('/app/db')
     .then(res => res.json())
     .then ((res) => {
-       console.log('---------Response to client---------', res);
+       console.log('Res', res);
        let keys = Object.keys(res);
        let vals = Object.values(res);
        console.log('keys', keys);
