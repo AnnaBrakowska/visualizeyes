@@ -25,7 +25,7 @@ dbController.connect = (req, res, next) => {
   next();
 }
 
-dbController.getDocuments  = (req, res, next) => {
+dbController.getDocuments  = (req, res) => {
   console.log('i am here');
   console.log('req.params', req.params);
   const colName = req.params.colName;

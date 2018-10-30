@@ -26,6 +26,19 @@ class App extends Component {
     this.getDocumentsHandler = this.getDocumentsHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleConnected = this.toggleConnected.bind(this);
+    this.handleColClick = this.handleColClick.bind(this);
+  }
+
+  handleColClick(e) {
+    console.log(e.target);
+    let collectionName = e.target.innerText;
+    fetch(`/app/db/${collectionName}`)
+    .then(res => res.json())
+    .then(docs => {
+      console.log('docs', docs);
+      this.setState({ currCol: collectionName, data: docs })
+    })
+    .catch(err => console.log(err));
   }
 
   getDocumentsHandler() {
@@ -85,7 +98,7 @@ class App extends Component {
     return (
       <div>
         {this.state.connected ? (
-          <DbWindow />
+          <DbWindow currCol={this.state.currentCollection} collections={this.state.collections} handleColClick={this.handleColClick}/>
         ) : (
           <LandingPage
             handleChange={this.handleChange}
@@ -95,34 +108,6 @@ class App extends Component {
         )}
       </div>
     );
-
-    // for(let i = 0; i < this.state.resVals.length; i++) {
-    //   let curKey = this.state.resKeys[i];
-    //   let curVal = this.state.resVals[i];
-
-    //   objectConstruct[curKey] = curVal;
-      
-    //   for (let itm in objectConstruct) {
-    //     let cur = objectConstruct[itm];
-    //     console.log('itm', itm);
-    //     let cleanItm = JSON.parse(JSON.stringify(itm).replace('.', '-').toLowerCase());
-    //     for (let z = 0; z < cur.length; z++) {
-    //       count +=1;
-    //       let document = JSON.stringify(cur[z]);
-    //       documents.push(<span className={cleanItm} key={count}><span className="inner">{beautinator(JSON.parse(document))}</span></span>);
-    //     }
-    //   }
-    // }
-
- 
-      // <div>
-      //   { this.state.connected ? 
-      //     <MainContainer /> : 
-      //     <LandingPage handleChange={ this.handleChange } fetchOnClick={ this.fetchOnClick } url={ this.state.url }/> } 
-      //     <div className="wrap">{documents}</div>
-      // </div>
-
- 
   }
 }
 

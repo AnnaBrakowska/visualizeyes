@@ -39,7 +39,6 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       "/app": "http://localhost:8080",
-      "/app/*": "http://localhost:8080"
     }
   },
   plugins: [

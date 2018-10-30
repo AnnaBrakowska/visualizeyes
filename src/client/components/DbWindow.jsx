@@ -5,7 +5,7 @@ import DocumentsView from './DocumentsView.jsx';
 const DbWindow = (props) => {
   return(
     <div id="db-window">
-      <CollectionsView />
+      <CollectionsView currCol={props.currCol} collections={props.collections} handleColClick={props.handleColClick}/>
       <DocumentsView />
     </div>
   );
