@@ -18,7 +18,7 @@ class ModalExampleDimmer extends Component {
         <Button
           onClick={this.show("inverted")}
           id="button"
-          className="ui secondary basic button"
+          className="ui secondary inverted basic button"
         >
           <i className="power off icon" />
           Connect

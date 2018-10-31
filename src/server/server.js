@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path"); //directing path for path__dirname
 const PORT = process.env.PORT || 8080;

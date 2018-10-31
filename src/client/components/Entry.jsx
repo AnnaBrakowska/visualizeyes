@@ -13,7 +13,6 @@ export default function Entry(props) {
 
       <div id="landing-text">
         <div id="text1">VisualEyesDB</div>
-
         <div id="text2">MongoDB management tool</div>
       </div>
     </div>

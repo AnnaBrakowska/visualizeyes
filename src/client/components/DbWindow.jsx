@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import CollectionsView from "./CollectionsView.jsx";
 import Header from "./Header.jsx";
+
 import ReactJson from 'react-json-view';
 
 const DbWindow = props => {
   return (
     <div>
+      
       <Header logout={props.logout} />
       <div id="db-window">
         <CollectionsView

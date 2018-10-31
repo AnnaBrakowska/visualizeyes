@@ -26,6 +26,7 @@
     "generate-schema": "^2.6.0",
     "mongoose": "^5.3.6",
     "react": "^16.6.0",
+    "react-d3-tree": "^1.12.0",
     "react-dom": "^16.6.0",
     "react-json-view": "^1.19.1",
     "react-redux": "^5.1.0",

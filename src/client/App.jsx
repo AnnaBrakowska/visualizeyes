@@ -17,7 +17,7 @@ class App extends Component {
       authoPort: "27362",
       address: "ds127362.mlab.com",
       dbName: "neighborhood-guide",
-      nested: false
+      visualizeArr: [],
     };
 
     this.connectHandler = this.connectHandler.bind(this);
@@ -60,10 +60,16 @@ class App extends Component {
 
   handleColClick(e) {
     let collectionName = e.target.innerText;
+    let collectionEls = document.querySelectorAll('.collection');
+    for (let i = 0; i < collectionEls.length; i++){
+      collectionEls[i].classList.remove('selected-collection');
+    }
+    e.target.classList.add('selected-collection');
     fetch(`/app/db/${collectionName}`)
       .then(res => res.json())
       .then(docs => {
         this.setState({ currCol: collectionName, data: docs });
+        // this.visualizeHandle(docs)
       })
       .catch(err => console.log(err));
   }
@@ -84,6 +90,7 @@ class App extends Component {
 
   connectHandler() {
     fetch("/app/db", {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
@@ -91,8 +98,7 @@ class App extends Component {
         authoPort: this.state.authoPort,
         address: this.state.address,
         dbName: this.state.dbName
-      }),
-      headers: { "Content-Type": "application/json; charset=utf-8" }
+      })
     })
       .then(res => res.json())
       .then(data => {
@@ -120,19 +126,18 @@ class App extends Component {
       <div>
         {this.state.connected ? (
           <DbWindow
-            updateDb={this.updateDb}
-            handleNests={this.handleNests}
-            docData={this.state.data}
+            handleDocIdClick={this.handleDocIdClick}
             currCol={this.state.currentCollection}
-            logout={this.logout}
             collections={this.state.collections}
             handleColClick={this.handleColClick}
-            handleDocIdClick={this.handleDocIdClick}
+            handleNests={this.handleNests}
+            docData={this.state.data}
+            logout={this.logout}
           />
         ) : (
           <Entry
-            handleChange={this.handleChange}
             connectHandler={this.connectHandler}
+            handleChange={this.handleChange}
             dataToPass={this.state}
           />
         )}
