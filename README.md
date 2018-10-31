@@ -12,7 +12,10 @@ Built on top of an established, powerful project, VisualEyes version 2.0.0. now 
 * Javascript, ES6, ES7
 * NodeJS, ExpressJS
 * React
-* TreeJS
+* MongoDB
+* React JSON View
+* React-D3-Tree
 * Semantic UI React
+* Webpack 4, Babel 7
 
 
