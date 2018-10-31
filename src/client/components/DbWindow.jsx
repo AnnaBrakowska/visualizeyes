@@ -15,6 +15,7 @@ const DbWindow = props => {
         />
 
         <DocumentsView 
+          handleNests={props.handleNests}
           currDocs={props.docData} 
           documents={props.collections}
           handleDocIdClick={props.handleDocIdClick} 

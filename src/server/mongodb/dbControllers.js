@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const dbController = {};
 
-let url = 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
+let url;
+// 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
   // "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
 
 
@@ -33,7 +34,7 @@ dbController.getDocuments  = (req, res) => {
   mongoose.connection.on('open', () => {
     
     let modelNames = mongoose.connection.modelNames();
-    console.log('modelNAmes', modelNames);
+    console.log('modelNames', modelNames);
     let Collection;
     if(modelNames.indexOf(colName) !== -1){
       Collection = mongoose.connection.model(colName);

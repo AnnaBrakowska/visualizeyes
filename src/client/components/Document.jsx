@@ -1,32 +1,23 @@
 import React, { Component } from "react";
+import SubMenu from "antd/lib/menu/SubMenu";
 
 const Document = (props) => {
 
     let keys = Object.keys(props.data);
     let values = Object.values(props.data);
 
-    // const lis = [];
-
-    // keys.forEach((key, idx) => {
-    //     return lis.push(<li key={idx}>{key}: {values[idx]}</li>);
-    // })
-
-    // <ul class="submenu">
-    // {lis}
-    // </ul>
-    // 
+    const lis = keys.map((key, i) => {
+        if (typeof(values[i]) === 'object') {
+            return <li className="collection menu" key={i}>{key}: <Document key={i} data={values[i]} /></li>
+        } else {
+            return <li className="collection menu" key={i}>{key}: {values[i]}</li>
+        }
+    })
 
     return (
-        <li
-        className="collection"
-        name={props.data._id}
-        key={props.data._id}
-        onClick={props.handleDocIdClick}>
-            {props.data._id}
-        </li>
-    );
+        <ul className="submenu" >{lis}</ul>
+    )
   }
 
   export default Document;
-
 
