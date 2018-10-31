@@ -5,7 +5,7 @@ import Header from "./Header.jsx";
 
 const DbWindow = props => {
   return (
-    <div id="header">
+    <div>
       <Header logout={props.logout} />
       <div id="db-window">
         <CollectionsView

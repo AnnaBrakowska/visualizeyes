@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DbWindow from "./components/DbWindow.jsx";
-import LandingPage from "./components/LandingPage.jsx";
 
+import Entry from "./components/Entry.jsx";
 require("./css/style.css");
 
 class App extends Component {
@@ -96,7 +96,7 @@ class App extends Component {
             handleColClick={this.handleColClick}
           />
         ) : (
-          <LandingPage
+          <Entry
             handleChange={this.handleChange}
             connectHandler={this.connectHandler}
             dataToPass={this.state}

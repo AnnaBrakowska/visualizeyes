@@ -1,57 +1,57 @@
-@import url('https://fonts.googleapis.com/css?family=Libre+Franklin');
+@import url("https://fonts.googleapis.com/css?family=Libre+Franklin");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Libre Franklin', sans-serif;
-    font-size: 12px;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 12px;
 }
 
 #db-window {
-    width: 100%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 125px 4fr;
-    grid-gap: 0;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 125px 4fr;
+  grid-gap: 0;
 }
 
 #collections-view {
-    background: #F7F9F9;
-    height: auto;
-    padding: 0 20px;
+  background: #f7f9f9;
+  height: auto;
+  padding: 0 20px;
 }
 
 .collections-header {
-    width: 100%;
-    font-size: 10px;
-    height: 24px;
-    line-height: 24px;
-    border-bottom:2px #E8EBE4 solid; 
-    font-weight: 800px;
+  width: 100%;
+  font-size: 10px;
+  height: 24px;
+  line-height: 24px;
+  border-bottom: 2px #e8ebe4 solid;
+  font-weight: 800px;
 }
 
 .collection {
-    width: 100%;
-    font-size: 8px; 
-    height: 15px;
-    line-height: 15px;
-    list-style-type: none;
+  width: 100%;
+  font-size: 8px;
+  height: 15px;
+  line-height: 15px;
+  list-style-type: none;
 }
 
 .ant-checkbox-input {
-    width: 10px;
-    height: 10px;
-    display: inline-block;
-    box-shadow: none;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  box-shadow: none;
 }
 
 #documents-view {
-    background: #fff;
-    height: auto;
+  background: #fff;
+  height: auto;
 }
 /* .wrap {
     width: 100%;
@@ -64,72 +64,108 @@ body {
 } */
 
 .doc {
-    height: auto;
-    padding-bottom: 33.33%;
-    border: solid 1px black;
-    display: block;
-    font-size: 10px;
-    text-align: center;
-    position: relative;
+  height: auto;
+  padding-bottom: 33.33%;
+  border: solid 1px black;
+  display: block;
+  font-size: 10px;
+  text-align: center;
+  position: relative;
 }
 
 .inner {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: scroll;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: scroll;
 }
 
 div.custom-container {
-    background-color: #fff;
-    width: 100vw;
-    height: auto;
-    /* border: black solid 1px; */
-    position: relative;
+  background-color: #fff;
+  width: 100vw;
+  height: auto;
+  /* border: black solid 1px; */
+  position: relative;
 }
 
 svg.custom {
-    position: absolute;
-    top: 50%;
+  position: absolute;
+  top: 50%;
 }
 
 svg.custom .node circle {
-    width: 10px;
+  width: 10px;
 
-    height: 10px;
-	fill: rgb(0, 199, 255);
+  height: 10px;
+  fill: rgb(0, 199, 255);
 }
 
 svg.custom .node text {
-    font-size: 0.4rem;
-    background-color: #fff;
-    fill: #222;
-    text-align: center;
-    /* transform: translate(14px, 30px) rotate(-90deg); */
-    display: table; /* keep the background color wrapped tight */
-    background: white;
-    text-transform: uppercase;
+  font-size: 0.4rem;
+  background-color: #fff;
+  fill: #222;
+  text-align: center;
+  /* transform: translate(14px, 30px) rotate(-90deg); */
+  display: table; /* keep the background color wrapped tight */
+  background: white;
+  text-transform: uppercase;
 }
 
 svg.custom .node {
-	cursor: pointer;
+  cursor: pointer;
 }
 
-svg.custom path.link {    
-    fill: none;
-    stroke: #999;
-    stroke-width: 1px;
-    stroke-dasharray: 1, 5;
-    stroke-dashoffset: 120; 
-    animation: dash 17s infinite linear;
+svg.custom path.link {
+  fill: none;
+  stroke: #999;
+  stroke-width: 1px;
+  stroke-dasharray: 1, 5;
+  stroke-dashoffset: 120;
+  animation: dash 17s infinite linear;
 }
 
+/* Anna's styles */
 
+#modal {
+  margin-top: -300px;
+}
+#landing {
+  height: 100vh;
+  background-image: url("https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=940");
+}
+
+#landing-text {
+  margin-top: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#text1 {
+  font-size: 4.5rem;
+}
+
+#text2 {
+  font-size: 2.5rem;
+}
+#button {
+  margin: 2%;
+  border: 1px solid grey;
+}
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid lightgray;
+  box-shadow: 1px 0.5px 1px 1px lightgray;
+  padding: 1rem;
+  background: white;
+}
 
 @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
+  to {
+    stroke-dashoffset: 0;
   }
+}
