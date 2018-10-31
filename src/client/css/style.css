@@ -5,8 +5,22 @@
 }
 
 body {
-  font-family: "Libre Franklin", sans-serif;
-  font-size: 12px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 17px;
+  word-wrap: break-word;
+}
+
+.react-json-view {
+  word-break: break-word;
+}
+
+.react-json {
+  font-size: 1.5em !important;
+}
+
+.object-key {
+  color: #00b5ad !important;
+  font-weight: 800;
 }
 
 #db-window {

@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
-      currentCollection: "services",
+      currentCollection: "",
       data: [],
       connected: false,
       username: "neighborhoodguide",
@@ -25,6 +25,16 @@ class App extends Component {
     this.logout = this.logout.bind(this);
     this.handleColClick = this.handleColClick.bind(this);
     this.handleNests = this.handleNests.bind(this);
+    this.populateInitialData = this.populateInitialData.bind(this);
+  }
+
+  componentDidMount() {
+    this.populateInitialData();
+  }
+
+  populateInitialData() {
+    let collectionView = document.querySelector('#collections-view');
+    console.log(collectionView);
   }
 
   handleColClick(e) {
