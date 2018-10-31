@@ -91,6 +91,7 @@ body {
   display: grid;
   grid-template-columns: 360px 4fr;
   grid-gap: 0;
+  position: relative;
 }
 
 #collections-view {
@@ -154,5 +155,6 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 5px;
+  position: relative;
 }
 
