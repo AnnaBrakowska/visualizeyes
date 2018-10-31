@@ -6,7 +6,7 @@ Built on top of an established, powerful project, VisualEyes version 2.0.0. now 
 
 ![alt text](VisualEyesDB.png)
 ![alt text](VisualEyesDB-screenshot.png)
-
+![alt text](visualize.png)
 
 # Technologies used:
 * Javascript, ES6, ES7
