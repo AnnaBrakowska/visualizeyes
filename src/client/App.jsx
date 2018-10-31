@@ -127,6 +127,7 @@ class App extends Component {
         {this.state.connected ? (
           <DbWindow
             handleDocIdClick={this.handleDocIdClick}
+            updateDb={this.updateDb}
             currCol={this.state.currentCollection}
             collections={this.state.collections}
             handleColClick={this.handleColClick}
