@@ -6,18 +6,7 @@ export default class Header extends Component {
   }
   render() {
     return (
-      <div
-        // className="ui menu"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          border: "1px solid lightgray",
-          boxShadow: "1px 0.5px 1px 1px lightgray",
-          padding: "1rem",
-          background: "white"
-        }}
-      >
+      <div id="header">
         <div style={{ fontSize: "3rem" }}>VisualEyes</div>
 
         <div

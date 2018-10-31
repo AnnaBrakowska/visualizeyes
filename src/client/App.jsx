@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DbWindow from "./components/DbWindow.jsx";
-import LandingPage from "./components/LandingPage.jsx";
 
+import Entry from "./components/Entry.jsx";
 require("./css/style.css");
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
-      currentCollection: "services",
+      currentCollection: "",
       data: [],
       connected: false,
       username: "neighborhoodguide",
@@ -25,6 +25,16 @@ class App extends Component {
     this.logout = this.logout.bind(this);
     this.handleColClick = this.handleColClick.bind(this);
     this.handleNests = this.handleNests.bind(this);
+    this.populateInitialData = this.populateInitialData.bind(this);
+  }
+
+  componentDidMount() {
+    this.populateInitialData();
+  }
+
+  populateInitialData() {
+    let collectionView = document.querySelector('#collections-view');
+    console.log(collectionView);
   }
 
   handleColClick(e) {
@@ -80,7 +90,8 @@ class App extends Component {
           dbName: "",
           connected: !this.state.connected
         });
-      }).catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }
 
   handleNests(event) {
@@ -109,7 +120,7 @@ class App extends Component {
             handleDocIdClick={this.handleDocIdClick}
           />
         ) : (
-          <LandingPage
+          <Entry
             handleChange={this.handleChange}
             connectHandler={this.connectHandler}
             dataToPass={this.state}

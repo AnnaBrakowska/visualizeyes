@@ -6,7 +6,7 @@ import ReactJson from 'react-json-view';
 
 const DbWindow = props => {
   return (
-    <div id="header">
+    <div>
       <Header logout={props.logout} />
       <div id="db-window">
         <CollectionsView

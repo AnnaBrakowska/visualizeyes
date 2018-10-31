@@ -4,54 +4,62 @@ const dbController = {};
 
 let url;
 // 'mongodb://neighborhoodguide:26stmarksplace@ds127362.mlab.com:27362/neighborhood-guide'
-  // "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
-
-
+// "mongodb://violent-hunters:123abc@ds143143.mlab.com:43143/violent-hunters";
 
 dbController.getCollections = (req, res) => {
-  mongoose.connect( url, { useNewUrlParser: true });
-  mongoose.connection.on('open', () => {
-    const collections = mongoose.connection.db.listCollections().toArray()
+  mongoose.connect(
+    url,
+    { useNewUrlParser: true }
+  );
+  mongoose.connection.on("open", () => {
+    const collections = mongoose.connection.db.listCollections().toArray();
     collections.then(result => {
-      result = result.map(obj => {return {name: obj.name, uuid: obj.info.uuid}}).filter(obj => obj.uuid)
-      res.send(result)
+      result = result
+        .map(obj => {
+          return { name: obj.name, uuid: obj.info.uuid };
+        })
+        .filter(obj => obj.uuid);
+      res.send(result);
     });
   });
-}
-
+};
 
 dbController.connect = (req, res, next) => {
-  const { username, password, authoPort, address, dbName } = req.body
+  const { username, password, authoPort, address, dbName } = req.body;
   url = `mongodb://${username}:${password}@${address}:${authoPort}/${dbName}`;
   next();
-}
+};
 
-dbController.getDocuments  = (req, res) => {
-  console.log('i am here');
-  console.log('req.params', req.params);
+dbController.getDocuments = (req, res) => {
+  console.log("i am here");
+  console.log("req.params", req.params);
   const colName = req.params.colName;
-  mongoose.connect( url, { useNewUrlParser: true });
-  mongoose.connection.on('open', () => {
-    
+  mongoose.connect(
+    url,
+    { useNewUrlParser: true }
+  );
+  mongoose.connection.on("open", () => {
     let modelNames = mongoose.connection.modelNames();
-    console.log('modelNames', modelNames);
+    console.log("modelNames", modelNames);
     let Collection;
-    if(modelNames.indexOf(colName) !== -1){
+    if (modelNames.indexOf(colName) !== -1) {
       Collection = mongoose.connection.model(colName);
-    }else {
+    } else {
       Collection = mongoose.model(colName, new Schema({}), colName);
     }
     // console.log(Collection);
     Collection.find().then(docs => {
-      console.log("IT REACHES HERE")
+      console.log("IT REACHES HERE");
       res.send(docs);
     });
-
-  })
-}
+  });
+};
 
 dbController.getDatabase = (req, res, next) => {
-  mongoose.connect( url, { useNewUrlParser: true });
+  mongoose.connect(
+    url,
+    { useNewUrlParser: true }
+  );
   // Runs this logic once there is an open connection with the database
   mongoose.connection.on("open", () => {
     // Gets all the collections inside our database and turns it into an array
@@ -66,27 +74,31 @@ dbController.getDatabase = (req, res, next) => {
             let collectionName = collections[i].name;
             let modelNames = mongoose.connection.modelNames();
             let Collection;
-            console.log('collName', collectionName);
-            console.log('modelName', modelNames);
+            console.log("collName", collectionName);
+            console.log("modelName", modelNames);
 
-          // * Await allows us to properly save our documents
-          
-            if(modelNames.indexOf(collectionName) !== -1){
+            // * Await allows us to properly save our documents
+
+            if (modelNames.indexOf(collectionName) !== -1) {
               Collection = mongoose.connection.model(collectionName);
-            }else {
-              Collection = mongoose.model(collectionName, new Schema({}), collectionName);
-            } 
+            } else {
+              Collection = mongoose.model(
+                collectionName,
+                new Schema({}),
+                collectionName
+              );
+            }
 
             // * Await allows us to properly save our documents
             await Collection.find().then(docs => {
-              console.log("IT REACHES HERE")
+              console.log("IT REACHES HERE");
               res.locals[collectionName] = docs;
             });
-
           }
           next();
+        } catch (err) {
+          console.log(err);
         }
-        catch (err) { console.log(err); }
       })
       .catch(err => console.log("-----CollectionError-----", err));
   });

@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import Document from "./Document.jsx";
 
-const DocumentsView = (props) => {
+class DocumentsView extends Component {
+  render() {
+    let list = this.props.currDocs.map((datum, idx) => {
+      return (
+        <li key={idx} index={idx} className="collection">
+          {datum._id}
+          <Document data={datum} />
+        </li>
+      );
+    });
 
     return (
       <div id="documents-view">
         <div className="grid-item">
-          <ul className="collections">
-            {props.currDocs.map( (datum, idx) => {
-              return ( <li key ={idx} onClick={props.handleNests} index={idx} className="collection">{datum._id}</li> )
-            })}
-          </ul>
+          <ul className="collections">{list}</ul>
         </div>
-      </div> 
-    )
+      </div>
+    );
   }
+}
 
-  export default DocumentsView;
+export default DocumentsView;
