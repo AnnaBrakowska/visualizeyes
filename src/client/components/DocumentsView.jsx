@@ -8,7 +8,7 @@ const DocumentsView = (props) => {
         <div className="grid-item">
           <ul className="collections">
             {props.currDocs.map( (datum, idx) => {
-              return ( <Document data={datum}/> )
+              return ( <li key ={idx} onClick={props.handleNests} index={idx} className="collection">{datum._id}</li> )
             })}
           </ul>
         </div>

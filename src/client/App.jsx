@@ -16,13 +16,15 @@ class App extends Component {
       password: "26stmarksplace",
       authoPort: "27362",
       address: "ds127362.mlab.com",
-      dbName: "neighborhood-guide"
+      dbName: "neighborhood-guide",
+      nested: false
     };
 
     this.connectHandler = this.connectHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.logout = this.logout.bind(this);
     this.handleColClick = this.handleColClick.bind(this);
+    this.handleNests = this.handleNests.bind(this);
   }
 
   handleColClick(e) {
@@ -81,6 +83,13 @@ class App extends Component {
       }).catch(err => console.log(err));
   }
 
+  handleNests(event) {
+    event.preventDefault();
+    const index = event.target.attributes.index.value;
+    console.log(index);
+    this.data[index];
+  }
+
   handleChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
@@ -91,6 +100,7 @@ class App extends Component {
       <div>
         {this.state.connected ? (
           <DbWindow
+            handleNests={this.handleNests}
             docData={this.state.data}
             currCol={this.state.currentCollection}
             logout={this.logout}
