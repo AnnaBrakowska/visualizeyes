@@ -7,15 +7,15 @@ class Document extends Component {
   }
 
   createList(item) {
-    let keys = Object.keys(item);
+    console.log("Hello");
     let values = Array.isArray(item) ? item : Object.values(item);
     console.log(values);
     return values.map((el, i) => {
       console.log(el);
       return (
-        <ul key={keys[i]}>
-          {Array.isArray(el) ? <ul>{this.createList(el)}</ul> : el}
-        </ul>
+        <li key={i}>
+          {typeof el === "object" ? <ul>{this.createList(el)}</ul> : el}
+        </li>
       );
     });
   }

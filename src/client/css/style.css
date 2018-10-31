@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Libre+Franklin");
-
 * {
   margin: 0;
   padding: 0;
@@ -17,6 +15,7 @@ body {
   display: grid;
   grid-template-columns: 360px 4fr;
   grid-gap: 0;
+  position: relative;
 }
 
 #collections-view {
@@ -67,6 +66,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 5px;
+  position: relative;
 }
 
 .doc {
@@ -92,6 +92,30 @@ body {
   grid-column-start: auto;
   grid-row-start: auto;
   border-left: solid 1px black;
+}
+
+ul > div {
+  background: lime;
+  width: 327px;
+  height: auto;
+  overflow: scroll;
+  position: absolute;
+  left: 327px;
+  top: 0;
+}
+
+ul > div > ul {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid black;
+}
+
+ul > div > ul > li > ul {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid black;
 }
 
 .menu {
