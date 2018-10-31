@@ -17,7 +17,7 @@ class App extends Component {
       authoPort: "27362",
       address: "ds127362.mlab.com",
       dbName: "neighborhood-guide",
-      nested: false
+      visualizeArr: [],
     };
 
     this.connectHandler = this.connectHandler.bind(this);
@@ -27,6 +27,11 @@ class App extends Component {
     this.handleNests = this.handleNests.bind(this);
     this.populateInitialData = this.populateInitialData.bind(this);
   }
+
+//   toggleClass() {
+//     const currentState = this.state.active;
+//     this.setState({ active: !currentState });
+// };
 
   componentDidMount() {
     this.populateInitialData();
@@ -38,20 +43,43 @@ class App extends Component {
   }
 
   handleColClick(e) {
-    console.log(e.target);
     let collectionName = e.target.innerText;
+    let collectionEls = document.querySelectorAll('.collection');
+    for (let i = 0; i < collectionEls.length; i++){
+      collectionEls[i].classList.remove('selected-collection');
+    }
+    e.target.classList.add('selected-collection');
     fetch(`/app/db/${collectionName}`)
       .then(res => res.json())
       .then(docs => {
-        console.log("docs", docs);
+        let something = docs.map((el)=>{el.name})
         this.setState({ currCol: collectionName, data: docs });
+        // this.visualizeHandle(docs)
       })
       .catch(err => console.log(err));
   }
 
-  handleDocIdClick(e) {
-    console.log(e.target);
-  }
+  // handleDocIdClick(e) {
+  //   console.log(e.target);
+  // }
+
+  // visualizeHandle(thing) {
+  //   console.log('hello', thing)
+  //         // .then( docs => {
+  //     //   // for(let i = 0; i < docs.length; i++) {
+  //     //   //   console.log('doc', docs);
+  //     //   // }
+  //     // })
+  //           // const childName = {};
+  
+
+  //     // const visObj = {
+  //     //   name : collectionName,
+  //     //   children : [
+  
+  //     //   ]
+  //     // }
+  // }
 
   logout() {
     this.setState({
@@ -69,6 +97,7 @@ class App extends Component {
 
   connectHandler() {
     fetch("/app/db", {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
       body: JSON.stringify({
         username: this.state.username,
@@ -76,8 +105,7 @@ class App extends Component {
         authoPort: this.state.authoPort,
         address: this.state.address,
         dbName: this.state.dbName
-      }),
-      headers: { "Content-Type": "application/json; charset=utf-8" }
+      })
     })
       .then(res => res.json())
       .then(data => {
@@ -97,7 +125,6 @@ class App extends Component {
   handleNests(event) {
     event.preventDefault();
     const index = event.target.attributes.index.value;
-    console.log(index);
     this.data[index];
   }
 
@@ -111,18 +138,18 @@ class App extends Component {
       <div>
         {this.state.connected ? (
           <DbWindow
-            handleNests={this.handleNests}
-            docData={this.state.data}
+            handleDocIdClick={this.handleDocIdClick}
             currCol={this.state.currentCollection}
-            logout={this.logout}
             collections={this.state.collections}
             handleColClick={this.handleColClick}
-            handleDocIdClick={this.handleDocIdClick}
+            handleNests={this.handleNests}
+            docData={this.state.data}
+            logout={this.logout}
           />
         ) : (
           <Entry
-            handleChange={this.handleChange}
             connectHandler={this.connectHandler}
+            handleChange={this.handleChange}
             dataToPass={this.state}
           />
         )}

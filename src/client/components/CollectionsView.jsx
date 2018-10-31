@@ -4,7 +4,7 @@ import { Checkbox } from "antd";
 const CollectionsView = props => {
   return (
     <div id="collections-view">
-      <header className="collections-header">Collections</header>
+      <div className="collections-header">Collections</div>
       <ul className="collections">
         {props.collections.map(function(datum, idx) {
           return (

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Libre+Franklin");
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 * {
   margin: 0;
@@ -7,13 +7,73 @@
 }
 
 body {
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 17px;
   word-wrap: break-word;
 }
 
+#root {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.logo {
+  color: #F2ECFF;
+  font-size: 2.3rem;
+}
+
+/* Entry Page Styles */
+#modal {
+  margin-top: -300px;
+}
+
+.viz-modal {
+  width: 80vw;
+  height: 50vh;
+}
+#landing {
+  height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-0.3.5&s=b1e570b2140edd2724847aee7ec84bd9&auto=format&fit=crop&w=1934&q=80");
+}
+
+#landing-text {
+  margin-top: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #f3f3f3;
+}
+
+#text1 {
+  font-size: 4.5rem;
+}
+
+#text2 {
+  font-size: 2.5rem;
+}
+#button {
+  margin: 2%;
+  border: 1px solid grey;
+}
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 1px 0.5px 1px 1px lightgrey;
+  padding: 1rem 20px;
+  background: #787586;
+}
+
+
+/* Visualizer Page Styles */
+
 .react-json-view {
   word-break: break-word;
+  padding: 20px 20px 100px;
+  background: white!important;
+  height: auto;
+  overflow:scroll;
 }
 
 .react-json {
@@ -36,23 +96,31 @@ body {
 #collections-view {
   background: #f7f9f9;
   height: auto;
+  letter-spacing: .1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 .collections-header {
   width: 100%;
-  font-size: 28px;
-  font-weight: 300;
+  font-size: 20px;
+  font-weight: 200;
   color: #fff;
   letter-spacing: -0.02em;
   border-bottom: 1px #e8ebe4 solid;
-  text-indent: 20px;
+  text-indent: 55px;
   padding: 15px 0;
   background-color: #00b5ad;
+  letter-spacing: .1rem;
+  background-image: url("../img/noun_Document_1989346.svg");
+  background-repeat: no-repeat;
+  background-position: 10px 7px;
+  background-size: 40px auto;
 }
 
 .collections {
   width: 100%;
-  font-size: 15px;
+  font-size: 18px;
   height: 15px;
   line-height: 15px;
   list-style-type: none;
@@ -75,6 +143,11 @@ body {
   color: #fff;
 }
 
+.selected-collection {
+  background-color:#6FDFCD;
+  color: white;
+}
+
 #documents-view {
   background: #fff;
   height: auto;
@@ -83,110 +156,3 @@ body {
   gap: 5px;
 }
 
-.doc {
-  height: auto;
-  padding-bottom: 33.33%;
-  border: solid 1px black;
-  display: block;
-  font-size: 10px;
-  text-align: center;
-  position: relative;
-}
-
-.inner {
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: scroll;
-}
-
-.grid-item {
-  grid-column-start: auto;
-  grid-row-start: auto;
-  border-left: solid 1px black;
-}
-
-.menu {
-  width: 100%;
-  position: relative;
-  /* sets positioning context */
-}
-
-.menu > li > .submenu {
-  width: 325.25px;
-  display: none;
-}
-
-.menu > li:hover > .submenu {
-  display: block;
-}
-
-.submenu {
-  position: absolute;
-  top: 0;
-  left: 325.25px;
-  /* width of top level li */
-  list-style: none;
-}
-
-.menu > li {
-  color: #fff;
-  background: #38c6a6;
-  width: 100%;
-}
-
-.submenu > li {
-  background: #66d699;
-  border-bottom: 1px #e8ebe4 solid;
-  width: 100%;
-  padding: 10px 0;
-  font-size: 15px;
-  height: 50px;
-  line-height: 32px;
-  list-style-type: none;
-  text-indent: 20px;
-  border-bottom: 1px #e8ebe4 solid;
-  cursor: pointer;
-}
-
-.submenu > li > .submenu > li {
-  background: #94e48a;
-}
-
-#modal {
-  margin-top: -300px;
-}
-#landing {
-  height: 100vh;
-  background-image: url("https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=940");
-}
-
-#landing-text {
-  margin-top: 15%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#text1 {
-  font-size: 4.5rem;
-}
-
-#text2 {
-  font-size: 2.5rem;
-}
-#button {
-  margin: 2%;
-  border: 1px solid grey;
-}
-#header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid lightgray;
-  box-shadow: 1px 0.5px 1px 1px lightgray;
-  padding: 1rem;
-  background: white;
-}
