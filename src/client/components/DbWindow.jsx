@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CollectionsView from "./CollectionsView.jsx";
 import DocumentsView from "./DocumentsView.jsx";
 import Header from "./Header.jsx";
+import ReactJson from 'react-json-view';
 
 const DbWindow = props => {
   return (
@@ -13,14 +14,8 @@ const DbWindow = props => {
           collections={props.collections}
           handleColClick={props.handleColClick}
         />
-
-        <DocumentsView 
-          handleNests={props.handleNests}
-          currDocs={props.docData} 
-          documents={props.collections}
-          handleDocIdClick={props.handleDocIdClick} 
-        />
-        </div>
+        <ReactJson className='react-json' src={props.docData} name={null} collapsed={2} displayDataTypes={false}/>
+      </div>
     </div>
   );
 };
