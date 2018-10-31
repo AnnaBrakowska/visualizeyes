@@ -23,6 +23,7 @@
     "antd": "^3.10.3",
     "beautinator": "0.0.7",
     "express": "^4.16.4",
+    "generate-schema": "^2.6.0",
     "mongoose": "^5.3.6",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

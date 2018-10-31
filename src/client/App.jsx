@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       collections: [],
-      currentCollection: "",
+      currCol: "",
       data: [],
       connected: false,
       username: "neighborhoodguide",
@@ -24,33 +24,48 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.logout = this.logout.bind(this);
     this.handleColClick = this.handleColClick.bind(this);
-    this.handleNests = this.handleNests.bind(this);
     this.populateInitialData = this.populateInitialData.bind(this);
+    this.updateDb = this.updateDb.bind(this);
+  } 
+
+  updateDb(edit) {
+    const index = edit.namespace[0];
+    const toUpdate = this.state.data[index]._id;
+    const updateField = edit.name;
+    const updateValue = edit.new_value;
+    const newData = {};
+    const docMod = edit.existing_src[index];
+    delete docMod._id;
+    newData[updateField] = updateValue;
+    const colName = this.state.currCol;
+    fetch(`/app/db/${colName}/${toUpdate}`, {
+      method: "PUT",
+      body: JSON.stringify({newData: newData, docMod: docMod}),
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log('ERROR:', err))
   }
 
-  componentDidMount() {
-    this.populateInitialData();
-  }
-
-  populateInitialData() {
-    let collectionView = document.querySelector('#collections-view');
-    console.log(collectionView);
+  populateInitialData(cols) {
+    let colName = cols[0].name;
+    fetch(`/app/db/${colName}`)
+    .then(res => res.json())
+    .then(docs => {
+      this.setState({ currCol: colName, data: docs });
+    })
+    .catch(err => console.log(err));
   }
 
   handleColClick(e) {
-    console.log(e.target);
     let collectionName = e.target.innerText;
     fetch(`/app/db/${collectionName}`)
       .then(res => res.json())
       .then(docs => {
-        console.log("docs", docs);
         this.setState({ currCol: collectionName, data: docs });
       })
       .catch(err => console.log(err));
-  }
-
-  handleDocIdClick(e) {
-    console.log(e.target);
   }
 
   logout() {
@@ -81,6 +96,7 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        this.populateInitialData(data);
         this.setState({
           collections: data,
           username: "",
@@ -94,13 +110,6 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  handleNests(event) {
-    event.preventDefault();
-    const index = event.target.attributes.index.value;
-    console.log(index);
-    this.data[index];
-  }
-
   handleChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
@@ -111,6 +120,7 @@ class App extends Component {
       <div>
         {this.state.connected ? (
           <DbWindow
+            updateDb={this.updateDb}
             handleNests={this.handleNests}
             docData={this.state.data}
             currCol={this.state.currentCollection}

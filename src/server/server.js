@@ -10,14 +10,7 @@ const appRouter = express.Router();
 
 app.use(express.static(path.join(__dirname, "./../build/webpack-bundle.js")));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-//cross origin resource
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
+app.use(bodyParser.json()); 
 
 // //CLIENT ROUTES
 app.get('/', (req, res, next) => {
@@ -31,9 +24,9 @@ app.get('/webpack-bundle.js', (req, res, next) => {
 
 app.use('/app', appRouter);
 
-// Get request to get the database for users
 appRouter.get('/db/:colName', dbControllers.getDocuments);
 appRouter.post('/db', dbControllers.connect, dbControllers.getCollections);
+appRouter.put('/db/:colName/:id', dbControllers.updateDocument);
 
 
 app.listen(PORT, () => {
