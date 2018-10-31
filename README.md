@@ -3,7 +3,7 @@ VisualEyesDB is a open source web-based GUI for MongoDB enthusiasts. Built on to
 version 2.0.0. now empowers users to make smarter decisions about their databases. It offers intuitive and easy-to-use UI, full CRUD functionality, and visualization of data.
 
 ![alt text](VisualEyesDB.png)
-![alt text](VisualEyesDB(1).png)
+![alt text](VisualEyesDB1.png)
 
 # Technologies used:
 * Javascript, ES6, ES7
