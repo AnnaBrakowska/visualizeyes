@@ -13,10 +13,18 @@ const DbWindow = props => {
           collections={props.collections}
           handleColClick={props.handleColClick}
         />
-        <DocumentsView />
-      </div>
+
+        <DocumentsView 
+          handleNests={props.handleNests}
+          currDocs={props.docData} 
+          documents={props.collections}
+          handleDocIdClick={props.handleDocIdClick} 
+        />
+        </div>
     </div>
   );
 };
 
 export default DbWindow;
+
+

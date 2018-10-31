@@ -1,14 +1,25 @@
 import React, { Component } from "react";
+import Document from "./Document.jsx";
 
-export default class DocumentsView extends Component {
-  constructor(props) {
-    super(props);
-  }
+class DocumentsView extends Component {
   render() {
+    let list = this.props.currDocs.map((datum, idx) => {
+      return (
+        <li key={idx} index={idx} className="collection">
+          {datum._id}
+          <Document data={datum} />
+        </li>
+      );
+    });
+
     return (
       <div id="documents-view">
-        <h1>This is the documents container</h1>
+        <div className="grid-item">
+          <ul className="collections">{list}</ul>
+        </div>
       </div>
     );
   }
 }
+
+export default DocumentsView;
