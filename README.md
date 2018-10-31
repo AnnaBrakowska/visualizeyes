@@ -13,6 +13,3 @@ version 2.0.0. now empowers users to make smarter decisions about their database
 * Semantic UI React
 
 
-is a unified visual tool for database architects, developers, and DBAs.
-
-
